@@ -1,0 +1,52 @@
+{
+  "name": "resplash",
+  "version": "1.0.0",
+  "author": "Khanh Le",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "lint": "eslint --ext .ts,.tsx src",
+    "type-check": "tsc --noEmit",
+    "start": "next start",
+    "clean": "rimraf .next"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.4.4",
+    "@tailwindcss/typography": "^0.2.0",
+    "clsx": "^1.1.1",
+    "framer-motion": "^2.1.0",
+    "next": "^9.4.5-canary.42",
+    "query-string": "^6.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-popper": "^2.2.3",
+    "react-query": "^2.5.5",
+    "tailwindcss": "^1.5.2"
+  },
+  "devDependencies": {
+    "@lednhatkhanh/eslint-config-next-app": "0.0.3",
+    "@lednhatkhanh/prettier-config": "0.0.2",
+    "@next/bundle-analyzer": "^9.4.4",
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/react": "^10.4.7",
+    "@testing-library/react-hooks": "^3.3.0",
+    "@types/node": "^14.0.24",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "autoprefixer": "^9.8.5",
+    "eslint": "^7.5.0",
+    "jest": "^26.1.0",
+    "msw": "^0.19.5",
+    "npm-run-all": "^4.1.5",
+    "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.0.5",
+    "react-test-renderer": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "sass": "^1.26.10",
+    "typescript": "^3.9.7",
+    "typescript-plugin-css-modules": "^2.4.0"
+  }
+}
