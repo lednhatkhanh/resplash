@@ -22,7 +22,7 @@ const useFetchPhotos = () => {
   } = useInfiniteQuery<PhotoModel[], 'photos', number>({
     queryKey: 'photos',
     queryFn(_key, page = 1) {
-      return fetch(`/api/unsplash/photos?${stringify({ page, per_page: 20 })}`).then((response) => response.json());
+      return fetch(`/api/unsplash/photos?${stringify({ page, per_page: 15 })}`).then((response) => response.json());
     },
     config: {
       getFetchMore(lastPage, allPages) {

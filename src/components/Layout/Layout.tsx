@@ -33,7 +33,7 @@ export const Layout: React.FC<Props> = ({ className, children, ...rest }) => {
             <ListItemText>Photos</ListItemText>
           </SideBarLink>
 
-          <SideBarLink href="/">
+          <SideBarLink href="/collections">
             <ListItemIcon>
               <DisplayGridIcon />
             </ListItemIcon>

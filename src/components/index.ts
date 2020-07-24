@@ -9,3 +9,5 @@ export * from './SideBar';
 export * from './ListItem';
 export * from './Layout';
 export * from './Input';
+export * from './CollectionCard';
+export * from './CollectionsList';

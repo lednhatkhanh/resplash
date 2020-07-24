@@ -10,6 +10,7 @@ import { Button } from '../Button';
 import { AppLink } from '../AppLink';
 
 import classes from './PhotoCard.module.scss';
+import { useImageSrcset } from 'src/hooks';
 
 type Props = React.ComponentPropsWithRef<'a'> & {
   photo: PhotoModel;
@@ -18,7 +19,7 @@ type Props = React.ComponentPropsWithRef<'a'> & {
 const PhotoCard: React.FC<Props> = ({ photo, ...rest }) => {
   const description = photo.alt_description ?? photo.description ?? `A photo of @${photo.user.username}`;
   const handleDownload = useDownload(photo);
-  const srcSet = useImageSrcSet(photo.urls.raw, imageSizes);
+  const srcSet = useImageSrcset(photo.urls.raw, imageSizes);
 
   return (
     <AppLink
@@ -88,10 +89,6 @@ const useDownload = (photo: PhotoModel) => {
   };
 
   return triggerDownload;
-};
-
-const useImageSrcSet = (rawUrl: string, sizes: number[]) => {
-  return sizes.map((size) => `${rawUrl}&auto=format&q=60&fit=crop&w=${size} ${size}w`).join(', ');
 };
 
 export { PhotoCard };
