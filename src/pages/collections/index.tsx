@@ -4,9 +4,16 @@ import { stringify } from 'querystring';
 import { Layout, CollectionsList } from 'src/components';
 import { CollectionModel } from 'src/models';
 import Head from 'next/head';
+import { uniqBy } from 'src/helpers';
 
 const CollectionsPage = () => {
-  const { collections, isFetchingCollections, fetchMoreCollections } = useFetchCollections();
+  const { collections, isFetchingCollections, fetchMoreCollections, canFetchMoreCollections } = useFetchCollections();
+
+  const handleFetchMoreCollections = () => {
+    if (canFetchMoreCollections && collections.length) {
+      fetchMoreCollections();
+    }
+  };
 
   return (
     <>
@@ -17,7 +24,7 @@ const CollectionsPage = () => {
         <CollectionsList
           collections={collections}
           isFetching={isFetchingCollections}
-          onLoadMore={fetchMoreCollections}
+          onLoadMore={handleFetchMoreCollections}
         />
       </Layout>
     </>
@@ -30,10 +37,11 @@ const useFetchCollections = () => {
     isFetching: isFetchingCollections,
     isFetchingMore: isFetchingMoreCollections,
     fetchMore: fetchMoreCollections,
+    canFetchMore: canFetchMoreCollections,
   } = useInfiniteQuery<CollectionModel[], 'collections', number>({
     queryKey: 'collections',
     queryFn(_key, page = 1) {
-      return fetch(`/api/unsplash/collections?${stringify({ page, per_page: 15 })}`).then((response) =>
+      return fetch(`/api/unsplash/collections/featured?${stringify({ page, per_page: 15 })}`).then((response) =>
         response.json(),
       );
     },
@@ -49,9 +57,15 @@ const useFetchCollections = () => {
       staleTime: Infinity,
     },
   });
-  const collections = (collectionPages ?? []).flat();
+  const collections = uniqBy((collectionPages ?? []).flat(), 'id');
 
-  return { collections, isFetchingCollections, isFetchingMoreCollections, fetchMoreCollections };
+  return {
+    collections,
+    isFetchingCollections,
+    isFetchingMoreCollections,
+    fetchMoreCollections,
+    canFetchMoreCollections,
+  };
 };
 
 export default CollectionsPage;

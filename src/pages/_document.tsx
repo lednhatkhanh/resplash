@@ -6,6 +6,7 @@ export default class ResplashDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta charSet="utf-8" />
           <link rel="icon" type="image/svg+xml" href="/images/unsplash.svg" />
           <meta name="description" content="A pwa Unsplash client" />
         </Head>

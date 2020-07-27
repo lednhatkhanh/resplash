@@ -1,7 +1,8 @@
 import { PhotoModel } from './photo.model';
 import { UserModel } from './user.model';
+import { Indexable } from './common';
 
-export interface CollectionModel {
+export interface CollectionModel extends Indexable {
   id: number;
   title: string;
   description: null;

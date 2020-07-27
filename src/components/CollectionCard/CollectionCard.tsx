@@ -4,11 +4,12 @@ import { CollectionModel } from 'src/models';
 import { AppLink } from '../AppLink';
 import classes from './CollectionCard.module.scss';
 import { useImageSrcset } from 'src/hooks';
+import { UserItem } from '../UserItem';
 
-type Props = {
+type Props = React.ComponentPropsWithRef<'a'> & {
   collection: CollectionModel;
 };
-export const CollectionCard: React.FC<Props> = ({ collection }) => {
+export const CollectionCard: React.FC<Props> = ({ collection, style, ...rest }) => {
   const coverPhotoDescription =
     collection.cover_photo.alt_description ??
     collection.cover_photo.description ??
@@ -17,28 +18,20 @@ export const CollectionCard: React.FC<Props> = ({ collection }) => {
 
   return (
     <AppLink
+      {...rest}
       className="focus:outline-none focus:shadow-outline rounded p-1 transition-all duration-150 ease-in-out"
-      href="/"
+      href={`/collections/${collection.id}`}
+      style={style}
     >
-      <div className={clsx('flex items-center', classes.user)}>
-        <img
-          className="w-8 h-8 rounded-full"
-          src={collection.user.profile_image.medium}
-          alt={`@${collection.user.username}`}
-          loading="lazy"
-          width={32}
-          height={32}
-        />
-        <span>{collection.user.name}</span>
-      </div>
+      <UserItem user={collection.user} />
 
       <div className="h-2" />
 
       <div className="relative">
         <img
           className="shadow-lg rounded"
-          height={collection.cover_photo.height}
-          width={collection.cover_photo.width}
+          height={style?.height}
+          width={style?.width}
           src={collection.cover_photo.urls.regular}
           sizes="(min-width: 1280px) 400px, (min-width: 1024px) 315px, (min-width: 768px) 354px, calc(100vw - 40px)"
           srcSet={coverPhotoSrcset}

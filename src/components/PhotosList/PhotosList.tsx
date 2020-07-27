@@ -12,9 +12,18 @@ type Props = {
 };
 
 export const PhotosList: React.FC<Props> = ({ photos, isFetching, onLoadMore }) => {
-  const renderPhoto = React.useCallback((photo: PhotoModel) => {
-    return <PhotoCard key={photo.id} photo={photo} />;
+  const renderPhoto = React.useCallback((photo: PhotoModel, itemStyle: React.CSSProperties) => {
+    return <PhotoCard key={photo.id} photo={photo} style={itemStyle} />;
   }, []);
 
-  return <MasonryList items={photos} renderItem={renderPhoto} isFetching={isFetching} onLoadMore={onLoadMore} />;
+  return (
+    <MasonryList
+      items={photos}
+      renderItem={renderPhoto}
+      itemHeightPath="height"
+      itemWidthPath="width"
+      isFetching={isFetching}
+      onLoadMore={onLoadMore}
+    />
+  );
 };

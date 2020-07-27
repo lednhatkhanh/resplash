@@ -1,6 +1,7 @@
 import { UserModel } from './user.model';
+import { Indexable } from './common';
 
-export interface PhotoModel {
+export interface PhotoModel extends Indexable {
   id: string;
   created_at: Date;
   updated_at: Date;

@@ -1,22 +1,20 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useMutation } from 'react-query';
-
 import { PhotoModel } from 'src/models';
 import { SoftwareDownloadIcon, HeartIcon } from 'src/icons';
-
+import { useImageSrcset } from 'src/hooks';
 import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { AppLink } from '../AppLink';
-
+import { UserItem } from '../UserItem';
 import classes from './PhotoCard.module.scss';
-import { useImageSrcset } from 'src/hooks';
 
 type Props = React.ComponentPropsWithRef<'a'> & {
   photo: PhotoModel;
 };
 
-const PhotoCard: React.FC<Props> = ({ photo, ...rest }) => {
+const PhotoCard: React.FC<Props> = ({ photo, style, ...rest }) => {
   const description = photo.alt_description ?? photo.description ?? `A photo of @${photo.user.username}`;
   const handleDownload = useDownload(photo);
   const srcSet = useImageSrcset(photo.urls.raw, imageSizes);
@@ -30,14 +28,15 @@ const PhotoCard: React.FC<Props> = ({ photo, ...rest }) => {
         classes.photoCard,
       )}
       aria-label={`Details about photo: ${description}`}
+      style={style}
     >
       <img
         sizes="(min-width: 1280px) 400px, (min-width: 1024px) 315px, (min-width: 768px) 354px, calc(100vw - 40px)"
         src={photo.urls.regular}
         srcSet={srcSet}
         alt={description}
-        height={photo.height}
-        width={photo.width}
+        height={style?.height}
+        width={style?.width}
         loading="lazy"
       />
 
@@ -47,17 +46,7 @@ const PhotoCard: React.FC<Props> = ({ photo, ...rest }) => {
           classes.overlay,
         )}
       >
-        <div className={clsx('flex justify-start items-center', classes.user)}>
-          <img
-            loading="lazy"
-            width="32"
-            height="32"
-            className="rounded-full w-8 h-8"
-            src={photo.user.profile_image.medium}
-            alt={photo.user.username}
-          />
-          <span className="prose prose-sm">{photo.user.name}</span>
-        </div>
+        <UserItem user={photo.user} />
 
         <Button aria-label="Like" variant="quiet" icon={<HeartIcon />}>
           {photo.likes}

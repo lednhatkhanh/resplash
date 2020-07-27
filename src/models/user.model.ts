@@ -4,11 +4,11 @@ export interface UserModel {
   username: string;
   name: string;
   first_name: string;
-  last_name: null;
-  twitter_username: string;
-  portfolio_url: string;
-  bio: string;
-  location: null;
+  last_name: string | null;
+  twitter_username: string | null;
+  portfolio_url: string | null;
+  bio: string | null;
+  location: string | null;
   links: UserLinks;
   profile_image: ProfileImage;
   instagram_username: string;

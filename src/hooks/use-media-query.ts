@@ -1,4 +1,5 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 
 const smMediaString = '(min-width: 640px)';
 const mdMediaString = '(min-width: 768px)';
@@ -18,9 +19,9 @@ export const useMediaQuery = (queryString: string) => {
     const mql = window.matchMedia(queryString);
     setMatch(mql.matches);
 
-    const handleMQLChange = (event: MediaQueryListEvent) => {
+    const handleMQLChange = debounce((event: MediaQueryListEvent) => {
       setMatch(event.matches);
-    };
+    }, 200);
 
     if (mql.addEventListener) {
       mql.addEventListener('change', handleMQLChange);

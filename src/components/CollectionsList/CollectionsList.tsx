@@ -10,11 +10,19 @@ type Props = {
 };
 
 export const CollectionsList: React.FC<Props> = ({ collections, isFetching, onLoadMore }) => {
-  const renderCollection = (collection: CollectionModel) => {
-    return <CollectionCard key={collection.id} collection={collection} />;
+  const renderCollection = (collection: CollectionModel, itemStyle: React.CSSProperties) => {
+    return <CollectionCard key={collection.id} style={itemStyle} collection={collection} />;
   };
 
   return (
-    <MasonryList items={collections} renderItem={renderCollection} isFetching={isFetching} onLoadMore={onLoadMore} />
+    <MasonryList
+      items={collections}
+      renderItem={renderCollection}
+      isFetching={isFetching}
+      onLoadMore={onLoadMore}
+      itemHeightPath="cover_photo.height"
+      itemWidthPath="cover_photo.width"
+      rowGap={50}
+    />
   );
 };

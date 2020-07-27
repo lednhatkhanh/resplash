@@ -27,7 +27,7 @@ export const Header = React.forwardRef<HTMLElement, Props>(function Header({ onM
         </IconButton>
 
         <AppLink href="/" className={clsx('h-full flex items-center px-2 absolute', classes.logo)}>
-          <img className="w-8" src="images/unsplash.svg" alt="Logo" />
+          <img className="w-8" src="/images/unsplash.svg" alt="Logo" />
         </AppLink>
       </div>
     </motion.header>
