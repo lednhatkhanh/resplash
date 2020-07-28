@@ -14,7 +14,7 @@ type SearchPhotoResult = {
 
 const SearchPage = () => {
   const router = useRouter();
-  const { data: results, isFetching: isSearching, fetchMore } = useInfiniteQuery<
+  const { data: results, isFetching: isSearching, fetchMore, canFetchMore } = useInfiniteQuery<
     SearchPhotoResult,
     ['search', string | undefined],
     number
@@ -51,6 +51,12 @@ const SearchPage = () => {
     });
   };
 
+  const handleFetchMore = () => {
+    if (canFetchMore) {
+      fetchMore();
+    }
+  };
+
   return (
     <Layout>
       <form onSubmit={handleSearch}>
@@ -66,7 +72,7 @@ const SearchPage = () => {
 
       <div className="h-5"></div>
 
-      <PhotosList photos={photos} isFetching={isSearching} onLoadMore={fetchMore} />
+      <PhotosList photos={photos} isFetching={isSearching} onLoadMore={handleFetchMore} />
     </Layout>
   );
 };

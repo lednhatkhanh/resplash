@@ -1,8 +1,6 @@
 import React from 'react';
-import clsx from 'clsx';
 import { CollectionModel } from 'src/models';
 import { AppLink } from '../AppLink';
-import classes from './CollectionCard.module.scss';
 import { useImageSrcset } from 'src/hooks';
 import { UserItem } from '../UserItem';
 
@@ -15,13 +13,14 @@ export const CollectionCard: React.FC<Props> = ({ collection, style, ...rest }) 
     collection.cover_photo.description ??
     `A photo of @${collection.user.username}`;
   const coverPhotoSrcset = useImageSrcset(collection.cover_photo.urls.raw, imageSizes);
+  const containerStyle = { ...style, height: undefined, width: undefined };
 
   return (
     <AppLink
       {...rest}
       className="focus:outline-none focus:shadow-outline rounded p-1 transition-all duration-150 ease-in-out"
       href={`/collections/${collection.id}`}
-      style={style}
+      style={containerStyle}
     >
       <UserItem user={collection.user} />
 
@@ -39,7 +38,7 @@ export const CollectionCard: React.FC<Props> = ({ collection, style, ...rest }) 
           loading="lazy"
         />
 
-        <div className={clsx('absolute inset-x-0 bottom-0 bg-white bg-opacity-75 rounded p-2', classes.overlay)}>
+        <div className="absolute inset-x-0 bottom-0 bg-white bg-opacity-75 rounded p-2">
           <h3 className="prose prose-lg capitalize">
             {collection.tags.length ? collection.tags[0].title : `A collection of @${collection.user.username}`}
           </h3>

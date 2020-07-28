@@ -15,7 +15,7 @@ export const Layout: React.FC<Props> = ({ className, children, ...rest }) => {
     setIsSideBarOpen(true);
   };
 
-  const handleCloseSideBar = () => {
+  const handleDismissSideBar = () => {
     setIsSideBarOpen(false);
   };
 
@@ -24,7 +24,7 @@ export const Layout: React.FC<Props> = ({ className, children, ...rest }) => {
       <Header onMenuButtonClick={handleOpenSideBar} />
 
       <main {...rest} className={clsx('container mx-auto p-5', className)}>
-        <SideBar isOpen={isSideBarOpen} onClose={handleCloseSideBar}>
+        <SideBar isOpen={isSideBarOpen} onDismiss={handleDismissSideBar}>
           <SideBarLink href="/">
             <ListItemIcon>
               <ImageIcon />

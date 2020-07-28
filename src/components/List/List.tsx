@@ -3,6 +3,10 @@ import { ExtendableComponentProps } from '../common';
 
 type Props = ExtendableComponentProps<'ul'>;
 
-export const List: React.FC<Props> = ({ children, ...rest }) => {
-  return <ul {...rest}>{children}</ul>;
-};
+export const List: React.FC<Props> = React.forwardRef(function List({ children, ...rest }, ref) {
+  return (
+    <ul {...rest} ref={ref}>
+      {children}
+    </ul>
+  );
+});

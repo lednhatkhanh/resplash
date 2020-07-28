@@ -11,3 +11,6 @@ export * from './Layout';
 export * from './Input';
 export * from './CollectionCard';
 export * from './CollectionsList';
+export * from './Portal';
+export * from './Menu';
+export * from './Paper';

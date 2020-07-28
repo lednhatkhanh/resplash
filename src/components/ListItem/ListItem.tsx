@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-
 import { OverridableComponentProps } from '../common';
+import classes from './ListItem.module.scss';
 
 type Props<Component extends React.ElementType = 'li'> = OverridableComponentProps<Component>;
 
@@ -17,6 +17,7 @@ export const ListItem = React.forwardRef<HTMLLIElement, Props>(function ListItem
       ref={ref}
       className={clsx(
         'grid grid-flow-col justify-start gap-2 items-center px-3 py-2 text-gray-700 focus:outline-none hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 transition-all duration-150 ease-in-out cursor-pointer border-b',
+        classes.listItem,
         className,
       )}
       tabIndex={tabIndex}

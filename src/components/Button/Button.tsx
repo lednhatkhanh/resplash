@@ -6,10 +6,14 @@ type ButtonProps = React.ComponentPropsWithRef<'button'> & {
   icon?: React.ReactNode;
 };
 
-export const Button: React.FC<ButtonProps> = ({ variant = 'default', icon, className, children, ...rest }) => {
+export const Button: React.FC<ButtonProps> = React.forwardRef(function Button(
+  { variant = 'default', icon, className, children, ...rest },
+  ref,
+) {
   return (
     <button
       {...rest}
+      ref={ref}
       className={clsx(
         'p-2 md:px-5 md:py-3 rounded font-semibold text-sm transition-all duration-150 ease-in-out leading-none select-none inline-flex items-center justify-center relative focus:outline-none focus:shadow-outline disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed',
         {
@@ -29,4 +33,4 @@ export const Button: React.FC<ButtonProps> = ({ variant = 'default', icon, class
       <span>{children}</span>
     </button>
   );
-};
+});

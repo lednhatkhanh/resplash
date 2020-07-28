@@ -23,10 +23,7 @@ const PhotoCard: React.FC<Props> = ({ photo, style, ...rest }) => {
     <AppLink
       {...rest}
       href="/"
-      className={clsx(
-        'shadow-lg relative overflow-hidden w-full rounded focus:outline-none focus:shadow-outline transition-all duration-200 ease-in-out',
-        classes.photoCard,
-      )}
+      className="shadow-lg relative overflow-hidden w-full rounded focus:outline-none focus:shadow-outline transition-all duration-200 ease-in-out"
       aria-label={`Details about photo: ${description}`}
       style={style}
     >

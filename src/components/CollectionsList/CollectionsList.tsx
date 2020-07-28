@@ -22,7 +22,7 @@ export const CollectionsList: React.FC<Props> = ({ collections, isFetching, onLo
       onLoadMore={onLoadMore}
       itemHeightPath="cover_photo.height"
       itemWidthPath="cover_photo.width"
-      rowGap={50}
+      rowGap={60}
     />
   );
 };

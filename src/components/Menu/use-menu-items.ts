@@ -1,15 +1,12 @@
 import React from 'react';
-import { useRefInjectedItems, useCycledIndex, usePreventBodyScroll } from 'src/hooks';
+import { useRefInjectedItems, useCycledIndex } from 'src/hooks';
 
-export const useSideBar = ({
-  isOpen,
-  children,
-  onClose,
-}: {
-  isOpen: boolean;
+type UseMenuItemsProps = {
   children: React.ReactNode;
-  onClose: () => void;
-}) => {
+  isOpen: boolean;
+};
+
+export const useMenuItem = ({ children, isOpen }: UseMenuItemsProps) => {
   const { items, itemRefs } = useRefInjectedItems(children);
   const {
     index: hoveringIndex,
@@ -17,41 +14,33 @@ export const useSideBar = ({
     decrease: decreaseHoveringIndex,
     setIndex: setHoveringIndex,
   } = useCycledIndex(items?.length ?? 0);
-  usePreventBodyScroll(isOpen);
-  const previousFocusedElementRef = React.useRef<HTMLElement | null>(null);
 
   const handleKeyDown = React.useCallback(
     (event: KeyboardEvent) => {
       if (isOpen) {
         switch (event.key) {
           case 'ArrowDown': {
+            event.preventDefault();
             increaseHoveringIndex();
             return;
           }
           case 'ArrowUp': {
+            event.preventDefault();
             decreaseHoveringIndex();
-            return;
-          }
-          case 'Escape': {
-            onClose();
             return;
           }
         }
       }
     },
-    [decreaseHoveringIndex, onClose, increaseHoveringIndex, isOpen],
+    [decreaseHoveringIndex, increaseHoveringIndex, isOpen],
   );
 
   React.useEffect(() => {
     if (!isOpen) {
       setHoveringIndex(-1);
-
-      previousFocusedElementRef.current?.focus();
-      previousFocusedElementRef.current = null;
       return;
     }
 
-    previousFocusedElementRef.current = (document.activeElement as HTMLElement) ?? null;
     setHoveringIndex(0);
   }, [isOpen, itemRefs, setHoveringIndex]);
 
