@@ -26,7 +26,7 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(function Button(
     >
       {icon && (
         <>
-          <div>{icon}</div>
+          <div className="w-6 h-6">{icon}</div>
           <div className="w-2" />
         </>
       )}

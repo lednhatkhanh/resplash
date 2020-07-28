@@ -1,11 +1,12 @@
 import React from 'react';
-import { Layout, Spinner, PhotosList, Button, Menu, ListItem, ListItemText } from 'src/components';
+import { Layout, Spinner, PhotosList, Button, Menu, ListItem, ListItemText, ListItemIcon } from 'src/components';
 import Head from 'next/head';
 import { useQuery, useInfiniteQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { SingleCollectionModel, PhotoModel } from 'src/models';
 import { UserItem } from 'src/components/UserItem';
 import { stringify } from 'querystring';
+import { ShareIcon, FacebookIcon, TwitterIcon } from 'src/icons';
 
 const CollectionDetailPage = () => {
   const router = useRouter();
@@ -97,7 +98,7 @@ const CollectionDetailPage = () => {
               </div>
 
               <div>
-                <Button ref={shareButtonRef} variant="primary" onClick={handleShare}>
+                <Button ref={shareButtonRef} variant="primary" onClick={handleShare} icon={<ShareIcon />}>
                   Share
                 </Button>
               </div>
@@ -122,6 +123,9 @@ const CollectionDetailPage = () => {
                 target="_blank"
                 rel="noreferrer noopener"
               >
+                <ListItemIcon>
+                  <FacebookIcon />
+                </ListItemIcon>
                 <ListItemText>Facebook</ListItemText>
               </ListItem>
               <ListItem
@@ -132,6 +136,9 @@ const CollectionDetailPage = () => {
                 target="_blank"
                 rel="noreferrer noopener"
               >
+                <ListItemIcon>
+                  <TwitterIcon />
+                </ListItemIcon>
                 <ListItemText>Twitter</ListItemText>
               </ListItem>
             </Menu>

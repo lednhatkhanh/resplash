@@ -5,3 +5,5 @@ export * from './MenuIcon';
 export * from './ImageIcon';
 export * from './DisplayGridIcon';
 export * from './SearchIcon';
+export * from './FacebookIcon';
+export * from './TwitterIcon';

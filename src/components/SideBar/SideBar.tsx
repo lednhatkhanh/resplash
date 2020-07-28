@@ -11,7 +11,7 @@ type BaseProps = {
 type Props = ExtendableComponentProps<'nav', BaseProps>;
 
 export const SideBar: React.FC<Props> = ({ className, children, isOpen = false, onDismiss, ...rest }) => {
-  const { items } = useMenuItem({ children, isOpen });
+  const { items } = useMenuItem({ children, isOpen, onDismiss });
 
   return (
     <Dialog isOpen={isOpen} onDismiss={onDismiss} enableAutoFocus={false}>

@@ -1,13 +1,25 @@
 import React from 'react';
 import { useRefInjectedItems, useCycledIndex } from 'src/hooks';
 
-type UseMenuItemsProps = {
+export type UseMenuItemsProps = {
   children: React.ReactNode;
   isOpen: boolean;
+  onDismiss: () => void;
 };
 
-export const useMenuItem = ({ children, isOpen }: UseMenuItemsProps) => {
-  const { items, itemRefs } = useRefInjectedItems(children);
+export const useMenuItem = ({ children, isOpen, onDismiss }: UseMenuItemsProps) => {
+  const handleItemClick = React.useCallback(() => {
+    if (isOpen) {
+      onDismiss();
+    }
+  }, [isOpen, onDismiss]);
+  const injectingProps = React.useMemo(
+    () => ({
+      onClick: handleItemClick,
+    }),
+    [handleItemClick],
+  );
+  const { items, itemRefs } = useRefInjectedItems(children, injectingProps);
   const {
     index: hoveringIndex,
     increase: increaseHoveringIndex,
@@ -57,7 +69,7 @@ export const useMenuItem = ({ children, isOpen }: UseMenuItemsProps) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, [handleItemClick, handleKeyDown]);
 
   return { items };
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { UserModel } from 'src/models';
 import clsx from 'clsx';
+import { UserModel } from 'src/models';
 import classes from './UserItem.module.scss';
 
 type Props = {
@@ -11,7 +11,7 @@ export const UserItem: React.FC<Props> = ({ user }) => {
   return (
     <div className={clsx('flex items-center', classes.user)}>
       <img
-        className="w-8 h-8 rounded-full"
+        className="w-8 h-8 rounded-full mr-2"
         src={user.profile_image.medium}
         alt={`@${user.username}`}
         loading="lazy"

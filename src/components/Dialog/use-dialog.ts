@@ -4,16 +4,16 @@ import { usePreventBodyScroll, useScrollBarWidth } from 'src/hooks';
 export type UseDialogProps = {
   isOpen: boolean;
   onDismiss: () => void;
-  enableAutoFocus?: boolean;
-  hasBackDrop?: boolean;
-  preventScrollOnOpen?: boolean;
+  enableAutoFocus: boolean;
+  hasBackDrop: boolean;
+  preventScroll: boolean;
 };
 
 export const useDialog = (
-  { isOpen, onDismiss, enableAutoFocus = true, hasBackDrop = true, preventScrollOnOpen = true }: UseDialogProps,
+  { isOpen, onDismiss, enableAutoFocus, hasBackDrop, preventScroll }: UseDialogProps,
   { content }: { content: HTMLElement | null },
 ) => {
-  usePreventBodyScroll(!!preventScrollOnOpen && isOpen);
+  usePreventBodyScroll(!!preventScroll && isOpen);
   const scrollBarWidth = useScrollBarWidth();
   const style = React.useMemo<React.CSSProperties>(() => ({ paddingRight: `${scrollBarWidth}px` }), [scrollBarWidth]);
   const previousActiveElementRef = React.useRef<HTMLElement | null>(null);
