@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const useIntersectionObserver = (element: HTMLElement | null, callback: () => void) => {
+export const useIntersectionObserver = (
+  element: HTMLElement | null,
+  callback: () => void,
+  options?: IntersectionObserverInit,
+) => {
   const callbackRef = React.useRef(callback);
 
   React.useEffect(() => {
@@ -20,7 +24,7 @@ export const useIntersectionObserver = (element: HTMLElement | null, callback: (
       if (firstEntry.isIntersecting) {
         callbackRef.current();
       }
-    });
+    }, options);
 
     observer.observe(element);
 
@@ -29,5 +33,5 @@ export const useIntersectionObserver = (element: HTMLElement | null, callback: (
         observer.unobserve(element);
       }
     };
-  }, [element]);
+  }, [element, options]);
 };
