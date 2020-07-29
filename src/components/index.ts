@@ -14,3 +14,4 @@ export * from './CollectionsList';
 export * from './Portal';
 export * from './Menu';
 export * from './Paper';
+export * from './Tabs';
