@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconProps } from '../common';
+import { IconProps } from './common';
 
 export const HeartIcon: React.FC<IconProps> = (props) => {
   return (
