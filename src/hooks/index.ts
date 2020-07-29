@@ -6,3 +6,5 @@ export * from './use-cycled-index';
 export * from './use-prevent-body-scroll';
 export * from './use-scroll-trigger';
 export * from './use-image-srcset';
+export * from './use-photo-meta';
+export * from './use-download-photo';
